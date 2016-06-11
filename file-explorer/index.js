@@ -1,3 +1,13 @@
+/**
+ *	使用到的知识点:
+ *	1，fs的文件操作。
+ *	2，foreach函数。
+ *	3，ANSI转义码。（控制格式及其他输出选项）
+ *	
+ *	
+ * 
+ */
+
 var fs = require('fs');
 var stdin = process.stdin;
 var stdout = process.stdout;
@@ -61,6 +71,11 @@ fs.readdir(process.cwd(),function(err,files){
 				fs.readFile(__dirname + '/' + filename, 'utf8', function(err,data){
 					console.log('');
 					console.log('\033[90m' + data.replace(/(.*)/g, '	$1') + '\033[39m'); 	//使用正则表达式进行辅助缩进
+					// \033表示转义序列的开始。
+					// [表示开始颜色设置。
+					// 90表示前景色为亮灰色。
+					// m表示颜色设置结束。
+					// 39用来将颜色再设置回去
 				
 				});
 			}
