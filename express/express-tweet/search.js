@@ -1,0 +1,10 @@
+var request = require('superagent');
+module.exports = function search(query,fn){
+	request.get('http://search.twitter.com/search.json',{q:query})		//接口已经修改了。
+	.end(function(res){
+		if (res.body && Array.isArray(res.body.results)) {
+			return fn(null,res.body.results);
+		}
+		fn(new Error('Bad twitter response'));
+	});
+};
