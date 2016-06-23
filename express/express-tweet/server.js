@@ -17,7 +17,16 @@ app.get('/search',function(req,res,next){
 		res.render('search',{results:tweets,search:req.query.q});
 	});
 });
-
+app.error(function(err,req,res,next){
+	if('Bad twitter response' == err.message){
+		res.render('twitter-error');
+	}else{
+		next();
+	}
+});
+app.error(function(err,req,res){
+	res.render('error',{status:500});
+});
 app.listen(3000);
 
 
